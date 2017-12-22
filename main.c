@@ -438,17 +438,17 @@ int is_correct_time(int hour, int minute, int second) {
 }
 
 float get_cost(char type[50], int duration_hour, int duration_minute, int duration_second, int beginn_hour, float costs[24][3]) {
-  float call_costs = 0.0;
+  float call_costs;
   int cost_type;
-  if (strcmp(type, "Ort")) {
+  if (!strcmp(type, "Ort")) {
+    cost_type = 0;
+  } else if (!strcmp(type, "Fern")) {
     cost_type = 1;
-  } else if (strcmp(type, "Fern")) {
-    cost_type = 2;
   } else {
-    cost_type = 3;
+    cost_type = 2;
   }
 
-  long duration = duration_hour*60*60+duration_minute*60+duration_second;
+  float duration = duration_hour*60*60+duration_minute*60+duration_second;
 
   call_costs = (duration/costs[beginn_hour][cost_type]) * 0.06;
 
